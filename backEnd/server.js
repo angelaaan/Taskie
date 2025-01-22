@@ -62,7 +62,7 @@ app.post('/signup', (req, res) => { //post request cuz frontend is sending data 
 });
 
 // lets let the regulars get back in! [login route]
-app.post('/login', (res,res) => {
+app.post('/login', (req, res) => {
     const {username, password} = req.body;
 
     // gets info from database
@@ -122,7 +122,7 @@ app.get('/tasks/:userId', (req, res) => {
         if (err) {
           return res.status(500).json({ error: 'Failed to fetch tasks!' });
         }
-        //send to front end if no error
+        //send to front end if no er
         res.json(rows);
       }
     );
