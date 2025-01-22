@@ -85,7 +85,10 @@ app.post('/login', (req, res) => {
 });
 
 // TASK HANDLING
-//  backend holds the tasks that frontend sends
+
+/**
+ * backend gets sent data from frontend
+ */
 app.post('/tasks', (req, res) => {
     // gets the inputed userid and task description from front end
     const { userId, task } = req.body;
@@ -106,7 +109,10 @@ app.post('/tasks', (req, res) => {
     );
 });
 
-// backend sends list of tasks to frontend
+/**
+ * backend sends data about the tasks to frontend
+ * this includes its id and whose task it is
+ */
 app.get('/tasks/:userId', (req, res) => {
     // get userId from the parameters
     const { userId } = req.params;
@@ -128,4 +134,20 @@ app.get('/tasks/:userId', (req, res) => {
     );
 });
   
-  
+/**
+ * delete tasks from backend
+ */
+app.delete('/tasks/:taskId', (req, res) => {
+    const { taskId } = req.params;
+
+    db.run(
+        'DELETE FROM tasks WHERE id = ?',
+        [taskId],
+        (err) => {
+            if (err) {
+                return res.status(500).json({ error: 'ahh i cant delete the task sowwy!' });
+            }
+            res.json({ success: true, message: 'all done ! good job !' });
+        }
+    );
+});

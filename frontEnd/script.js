@@ -62,18 +62,19 @@ document.getElementById('addTaskBtn').addEventListener('click', async () => {
     }
   });
   
-
+// to delete tasks
 async function deleteTask(taskId) {
+    //delete from data base as well
     const response = await fetch(`http://localhost:3000/tasks/${taskId}`, {
       method: 'DELETE',
     });
   
     const result = await response.json();
     if (result.success) {
-        alert('Task deleted!');
+        alert('good job ! proud of u hehe');
         loadTasks(); // Reload the task list
     } else {
-        alert('Failed to delete task!');
+        alert('I COULDNT DELETE TASK SOWWY!');
     }
 }
   
