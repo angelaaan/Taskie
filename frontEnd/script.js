@@ -2,7 +2,7 @@
 const urlParams = new URLSearchParams(window.location.search); // extract query params from page URL in an object
 const userId = urlParams.get('userId'); // retrieves userId value from the url object above
 
-if (userId) { //user hasnt logged in !
+if (!userId) { //user hasnt logged in !
     alert('you forgot to login!');
     window.location.href = 'login.html';
 }

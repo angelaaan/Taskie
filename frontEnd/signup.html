@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sign Up for Taskie</title>
+  <link rel="stylesheet" href="style.css"> <!-- Assuming you already have style.css -->
+</head>
+<body>
+  <div class="container">
+    <h1>🌸 Sign Up for Taskie 🌸</h1>
+    <form id="signupForm">
+      <input type="text" id="username" placeholder="Create a username" required>
+      <input type="password" id="password" placeholder="Create a password" required>
+      <button type="submit">Sign Up</button>
+    </form>
+    <p>Already have an account? <a href="login.html">Log In</a></p>
+  </div>
+
+  <script>
+    document.getElementById('signupForm').addEventListener('submit', async (e) => {
+      e.preventDefault(); // Prevent the form from refreshing the page
+      
+      const username = document.getElementById('username').value;
+      const password = document.getElementById('password').value;
+
+      // Send signup data to backend
+      const response = await fetch('http://localhost:3000/signup', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ username, password }),
+      });
+
+      const result = await response.json();
+      if (result.success) {
+        alert(result.message); // Show success message
+        window.location.href = 'index.html'; // Redirect to login page
+      } else {
+        alert(result.error); // Show error message
+      }
+    });
+  </script>
+</body>
+</html>
