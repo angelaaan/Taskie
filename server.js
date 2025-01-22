@@ -5,6 +5,8 @@ const app = express();
 
 // Middleware
 app.use(bodyParser.json());
+// Serve static files from the "public" folder
+app.use(express.static('frontEnd'));
 
 // Database setup
 const db = new sqlite3.Database('./todo.db');
@@ -54,11 +56,11 @@ app.post('/signup', (req, res) => { //post request cuz frontend is sending data 
         //error handling
         (err) => {
             if (err) {
-                return res.status(400).json({ error: 'womp womp username taken'});
+              return res.status(400).json({ error: 'womp womp username taken'});
             }
             res.json({success: true, message: 'welecome to Taskie :)'});
         }
-    )
+    );
 });
 
 // lets let the regulars get back in! [login route]
@@ -81,7 +83,7 @@ app.post('/login', (req, res) => {
             // send to front end
             res.json({ success: true, userId: user.id });
         }
-    )
+    );
 });
 
 // TASK HANDLING

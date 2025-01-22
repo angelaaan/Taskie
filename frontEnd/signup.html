@@ -25,6 +25,7 @@
       const password = document.getElementById('password').value;
 
       // Send signup data to backend
+      console.log(username, password);
       const response = await fetch('http://localhost:3000/signup', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
